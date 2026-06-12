@@ -1,5 +1,5 @@
 import { useReducer } from "react"
-import { initialStore, storeReducer } from "../store"
+import { initialStore, storeReducer } from "../store/store"
 import { StoreContext } from "./StoreContext"
 
 
