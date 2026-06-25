@@ -1,18 +1,24 @@
 export const initialStore = () => {
     return {
-        message: null
+        apiConnect: false,
+        user: null
     }
 }
 
 export const storeReducer = (store, action = {}) => {
     switch (action.type) {
-        case 'set_hello':
+        case 'set_api_connect':
             return {
                 ...store,
-                message: action.payload
+                apiConnect: action.payload
+            }
+        case 'set_user':
+            return {
+                ...store,
+                user: action.payload
             }
         default:
-            throw Error ('Unknow action.');
+            throw Error('Unknow action.');
     }
 }
 

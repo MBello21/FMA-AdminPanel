@@ -8,13 +8,9 @@ export const Layout = () => {
   const location = useLocation();
   return (
     <ScrollToTop location={location}>
-      <div className="flex min-h-full w-full">
-        <Navbar className="w-3xs" />
-        <div className="min-h-full w-full">
-          <Outlet />
-          <Footer />
-        </div>
-      </div>
+      <Navbar />
+      <Outlet />
+      <Footer />
     </ScrollToTop>
   );
 };
