@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 .home {
     height: calc(100vh - 60px - 60px);
     display: flex;
