@@ -1,13 +1,14 @@
-import './Footer.css'
+import './Footer.css';
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className="w-full flex justify-center max-w-full bg-gray-500">
       <p className="footer-text">
-        Hecho con <span className="footer-heart">♥</span> — React + JS Boilerplate
+        Hecho con <span className="footer-heart">♥</span> — React + JS
+        Boilerplate
       </p>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
