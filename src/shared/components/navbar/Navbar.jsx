@@ -1,5 +1,6 @@
-import logo from '../../assets/react.svg';
-import useGlobalReducer from '../../hooks/useGlobalReducer';
+import logo from '../../../assets/react.svg';
+import useGlobalReducer from '../../../hooks/useGlobalReducer';
+import { UserDropDown } from './components/UserDropDown';
 
 const Navbar = () => {
   const { store } = useGlobalReducer();
@@ -29,13 +30,13 @@ const Navbar = () => {
               {store.apiConnect ? 'API conectada' : 'API desconectada'}
             </p>
           </div>
-          <div className="border border-neutral-300 rounded-md px-2 text-center flex items-center">
+          <div className="border border-neutral-300 rounded-md px-2 text-center flex items-center relative">
             <img src={logo} alt="user" className="m-1" />
             <div className="mx-2">
               <h2 className="text-sm text-white">{store.user?.firstname}</h2>
               <p className="text-xs text-gray-300">{store.user?.category}</p>
             </div>
-            <i className="text-white fa-solid fa-ellipsis-vertical"></i>
+            <UserDropDown />
           </div>
         </div>
       </div>

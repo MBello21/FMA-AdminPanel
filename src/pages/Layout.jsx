@@ -1,6 +1,6 @@
 import { Outlet, useNavigate } from 'react-router';
 import ScrollToTop from '../components/ScorllToTop/ScrollToTop';
-import Navbar from '../shared/components/Navbar.jsx';
+import Navbar from '../shared/components/navbar/Navbar.jsx';
 import Footer from '../components/Footer/Footer';
 import { useLocation } from 'react-router';
 import { useEffect } from 'react';
