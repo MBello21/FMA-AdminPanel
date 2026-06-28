@@ -14,7 +14,7 @@ export const useAuth = () => {
   const navigate = useNavigate();
 
   const [error, setError] = useState(null);
- 
+  const [loading, setLoading] = useState(false);
 
   const [user, setUser] = useState({
     email: '',
@@ -24,8 +24,9 @@ export const useAuth = () => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = async (event, user) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     try {
       const data = await login(user);
       if (data.error) {
@@ -36,6 +37,8 @@ export const useAuth = () => {
       navigate('/home');
     } catch {
       setError('Error de conexión');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,6 +46,7 @@ export const useAuth = () => {
     user,
     store,
     error,
+    loading,
 
     handleChange,
     handleSubmit,

@@ -1,9 +1,11 @@
 import { Link } from 'react-router';
 import { useAuth } from '../shared/hooks/useAuth';
 import { useState } from 'react';
+import useGlobalReducer from '../hooks/useGlobalReducer';
 
 export const Signin = () => {
-  const { user, store, error, handleChange, handleSubmit } = useAuth();
+  const { user, error, loading, handleChange, handleSubmit } = useAuth();
+  const { store } = useGlobalReducer();
   const [showPass, setShowPass] = useState(false);
 
   return (
@@ -23,17 +25,15 @@ export const Signin = () => {
           </div>
         </div>
 
-        <form
-          onSubmit={(event) => handleSubmit(event, user)}
-          className="min-h-8"
-        >
+        <form onSubmit={handleSubmit} className="min-h-8">
           <div className="flex flex-col px-7 gap-1 mb-4">
-            <label htmlFor="" className="my-1  text-sm text-gray-300">
+            <label htmlFor="email" className="my-1  text-sm text-gray-300">
               Correo electrónico
             </label>
             <div className="relative">
               <input
                 className="w-full pr-10 py-1 bg-neutral-900 text-white px-2 rounded-md"
+                id="email"
                 type="email"
                 name="email"
                 value={user.email}
@@ -43,12 +43,13 @@ export const Signin = () => {
             </div>
           </div>
           <div className="flex flex-col px-7 gap-1 mb-4">
-            <label htmlFor="" className="my-1  text-sm text-gray-300">
+            <label htmlFor="password" className="my-1  text-sm text-gray-300">
               Contraseña
             </label>
             <div className="relative">
               <input
                 className="w-full pr-10 py-1 bg-neutral-900 text-white px-2 rounded-md"
+                id="password"
                 type={showPass ? 'text' : 'password'}
                 name="password"
                 value={user.password}
@@ -72,11 +73,14 @@ export const Signin = () => {
           </div>
           <div className="px-7 my-2 flex justify-center">
             <button
-              className="bg-neutral-900 w-full border border-neutral-100 rounded-md p-1 text-gray-100 mt-3 hover:bg-neutral-700"
+              className="bg-neutral-900 w-full border border-neutral-100 rounded-md p-1 text-gray-100 mt-3 hover:bg-neutral-700 disabled:opacity-50 disabled:cursor-not-allowed"
               type="submit"
+              disabled={loading}
             >
-              <i className="fa-solid fa-right-to-bracket mx-2"></i>
-              Iniciar sesión
+              <i
+                className={`fa-solid ${loading ? 'fa-spinner fa-spin' : 'fa-right-to-bracket'} mx-2`}
+              ></i>
+              {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
             </button>
           </div>
         </form>
@@ -85,7 +89,7 @@ export const Signin = () => {
             <i
               className={`fa-solid fa-circle mx-2 ${store.apiConnect ? 'text-green-500' : 'text-red-600'}`}
             ></i>
-            Api conectada
+            {store.apiConnect ? 'API conectada' : 'API desconectada'}
           </p>
         </div>
       </div>
