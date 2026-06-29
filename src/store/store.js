@@ -3,6 +3,7 @@ export const initialStore = () => {
     apiConnect: false,
     user: null,
     token: null,
+    recommendations: [],
   };
 };
 
@@ -31,7 +32,11 @@ export const storeReducer = (store, action = {}) => {
         token: null,
         user: null,
       };
-
+    case 'set_recommendations':
+      return {
+        ...store,
+        recommendations: action.payload,
+      };
     default:
       throw Error('Unknow action.');
   }
