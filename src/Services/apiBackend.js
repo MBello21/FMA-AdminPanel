@@ -14,16 +14,18 @@ export const login = async (user) => {
     },
   });
   const data = await response.json();
-  localStorage.setItem('token', data.token);
   return data;
 };
 
 export const getUser = async () => {
   const response = await fetch('http://127.0.0.1:5000/api/user', {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')} `,
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
-  }); 
+  });
+  if (response.status === 401 || response.status === 422) {
+    return { error: 'Unauthorized' };
+  }
   const data = await response.json();
   return data;
 };

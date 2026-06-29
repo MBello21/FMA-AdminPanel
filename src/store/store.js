@@ -19,10 +19,19 @@ export const storeReducer = (store, action = {}) => {
         user: action.payload,
       };
     case 'set_token':
+      localStorage.setItem('token', action.payload);
       return {
         ...store,
         token: action.payload,
       };
+    case 'logout':
+      localStorage.removeItem('token');
+      return {
+        ...store,
+        token: null,
+        user: null,
+      };
+
     default:
       throw Error('Unknow action.');
   }

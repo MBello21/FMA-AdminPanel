@@ -34,6 +34,7 @@ export const useAuth = () => {
         return;
       }
       dispatch({ type: 'set_token', payload: data.token });
+      console.log('navegando a /home');
       navigate('/home');
     } catch {
       setError('Error de conexión');

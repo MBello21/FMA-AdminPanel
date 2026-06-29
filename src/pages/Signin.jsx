@@ -1,12 +1,22 @@
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { useAuth } from '../shared/hooks/useAuth';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useGlobalReducer from '../hooks/useGlobalReducer';
+import { useHealthCheck } from '../shared/hooks/useHealthCheck';
 
 export const Signin = () => {
   const { user, error, loading, handleChange, handleSubmit } = useAuth();
   const { store } = useGlobalReducer();
   const [showPass, setShowPass] = useState(false);
+  const navigate = useNavigate();
+
+  useHealthCheck();
+  useEffect(() => {
+    console.log('token:', localStorage.getItem('token'));
+    if (localStorage.getItem('token')) {
+      navigate('/home');
+    }
+  }, []);
 
   return (
     <div className="flex flex-col justify-center items-center  min-h-screen bg-neutral-900">
