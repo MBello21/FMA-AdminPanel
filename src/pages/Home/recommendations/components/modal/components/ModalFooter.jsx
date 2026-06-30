@@ -1,4 +1,7 @@
-export const ModalFooter = ({ handleSubmit, onClose }) => {
+import { useFormContext } from '../../../../../../hooks/useFormContext';
+
+export const ModalFooter = ({ onClose, confirmLabel }) => {
+  const { handleSubmit } = useFormContext();
   return (
     <div className="w-full flex justify-end gap-3 mt-3">
       <button
@@ -12,7 +15,7 @@ export const ModalFooter = ({ handleSubmit, onClose }) => {
         onClick={handleSubmit}
         className="px-2 py-1 border border-gray-500 text-gray-300 rounded-md hover:bg-neutral-900"
       >
-        Guardar
+        {confirmLabel}
       </button>
     </div>
   );

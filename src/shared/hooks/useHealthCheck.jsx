@@ -15,7 +15,7 @@ export const useHealthCheck = () => {
       }
     };
     health();
-    const interval = setInterval(health, 3000);
+    const interval = setInterval(health, 15000);
     return () => clearInterval(interval);
   }, [dispatch]);
 };

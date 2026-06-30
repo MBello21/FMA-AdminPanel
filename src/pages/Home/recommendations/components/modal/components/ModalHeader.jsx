@@ -1,8 +1,8 @@
-export const ModalHeader = ({ onClose }) => {
+export const ModalHeader = ({ onClose, title }) => {
   return (
     <div className="flex items-center w-full">
       <div className="text-start w-full">
-        <h2 className="text-sm text-gray-300">Nueva entrada</h2>
+        <h2 className="text-sm text-gray-300">{title}</h2>
       </div>
       <div className="text-end w-full">
         <button

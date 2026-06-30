@@ -11,8 +11,9 @@ const Temperatura = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const catActive = cat ?? null;
+
   return (
-    <div className="w-full max-w-full flex flex-col  bg-neutral-800 h-210">
+    <div className="w-full max-w-full flex flex-col  bg-neutral-800 min-h-screen h-auto py-4">
       <RecommendationHeader
         freak={'Temperatura'}
         onNew={() => setIsOpen(true)}
@@ -23,7 +24,11 @@ const Temperatura = () => {
         catActive={catActive}
         basePath={'/home/temperatura'}
       />
-      <CardList categories={CATEGORIES} freak={'temperatura'} />
+      <CardList
+        categories={CATEGORIES}
+        freak={'temperatura'}
+        catActive={catActive}
+      />
     </div>
   );
 };

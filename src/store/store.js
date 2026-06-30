@@ -4,6 +4,7 @@ export const initialStore = () => {
     user: null,
     token: null,
     recommendations: [],
+    freak: null,
   };
 };
 
@@ -36,6 +37,11 @@ export const storeReducer = (store, action = {}) => {
       return {
         ...store,
         recommendations: action.payload,
+      };
+    case 'set_freak':
+      return {
+        ...store,
+        freak: action.payload,
       };
     default:
       throw Error('Unknow action.');

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { postRecommendations } from '../../../../services/apiBackend';
 import useGlobalReducer from '../../../../hooks/useGlobalReducer';
 
@@ -6,11 +6,15 @@ const errorBackend = {
   'All fields are required': 'Todos los campos son requeridos',
 };
 
-export const useForm = (onClose, freak) => {
+export const useForm = (onClose, freak, id) => {
   const { store, dispatch } = useGlobalReducer();
   const ref = useRef();
   const [recInput, setRecInput] = useState('');
+  const [workRecInput, setWorkRecInput] = useState('');
+  const [prohRecInput, setProhRecInput] = useState('');
   const [editIndex, setEditIndex] = useState(null);
+  const [editWorkIndex, setEditWorkIndex] = useState(null);
+  const [editProhIndex, setEditProhIndex] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [form, setForm] = useState({
@@ -18,22 +22,28 @@ export const useForm = (onClose, freak) => {
     cat: 1,
     title: '',
     recommendation_list: [],
+    work_recommendation_list: [],
+    prohibition_list: [],
   });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     try {
-      const data = await postRecommendations(form);
-      console.log(data);
-      if (data.error) {
-        setError(errorBackend[data.error] || data.error);
-        return;
+      if (id) {
+        //patch
+      } else {
+        const data = await postRecommendations(form);
+        console.log(data);
+        if (data.error) {
+          setError(errorBackend[data.error] || data.error);
+          return;
+        }
+        dispatch({
+          type: 'set_recommendations',
+          payload: [...store.recommendations, data.recommendation],
+        });
       }
-      dispatch({
-        type: 'set_recommendations',
-        payload: [...store.recommendations, data.recommendation],
-      });
       onClose();
     } catch {
       setError('Error de conexión');
@@ -41,7 +51,6 @@ export const useForm = (onClose, freak) => {
       setLoading(false);
     }
   };
-  console.log(form);
   const handleChange = (event) => {
     event.preventDefault();
     setForm({
@@ -52,46 +61,71 @@ export const useForm = (onClose, freak) => {
           : event.target.value,
     });
   };
-  const handleRecInput = (event) => {
+  const handleRecInput = (event, setInput) => {
     event.preventDefault();
-    setRecInput(event.target.value);
+    setInput(event.target.value);
   };
-  const addRec = () => {
-    if (!recInput.trim()) return;
-    if (editIndex !== null) {
+  const addRec = (field, input, setInput, editIdx, setEditIdx) => {
+    if (!input.trim()) return;
+    if (editIdx !== null) {
       // sustituye en la posición original
-      const newList = [...form.recommendation_list];
-      newList[editIndex] = recInput.trim();
-      setForm({ ...form, recommendation_list: newList });
-      setEditIndex(null);
+      const newList = [...form[field]];
+      newList[editIdx] = input.trim();
+      setForm({ ...form, [field]: newList });
+      setEditIdx(null);
     } else {
       // añade al final
       setForm({
         ...form,
-        recommendation_list: [...form.recommendation_list, recInput.trim()],
+        [field]: [...form[field], input.trim()],
       });
     }
-    setRecInput('');
+    setInput('');
   };
 
-  const removeRec = (index) => {
+  const removeRec = (field, index) => {
     setForm({
       ...form,
-      recommendation_list: form.recommendation_list.filter(
-        (_, i) => i !== index
-      ),
+      [field]: form[field].filter((_, i) => i !== index),
     });
   };
 
-  const editRec = (index) => {
-    setRecInput(form.recommendation_list[index]);
-    setEditIndex(index);
+  const editRec = (field, setEditIdx, setInput, index) => {
+    setInput(form[field][index]);
+    setEditIdx(index);
   };
-  console.log(form);
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        if (form.title || form.recommendation_list.length > 0) {
+          if (
+            window.confirm('¿Seguro que quieres salir? Perderás los datos.')
+          ) {
+            onClose();
+          }
+        } else {
+          onClose();
+        }
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [ref, onClose, form]);
 
   return {
     form,
     recInput,
+    setRecInput,
+    workRecInput,
+    setWorkRecInput,
+    prohRecInput,
+    setProhRecInput,
+    editIndex,
+    setEditIndex,
+    editWorkIndex,
+    setEditWorkIndex,
+    editProhIndex,
+    setEditProhIndex,
     loading,
     error,
 

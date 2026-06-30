@@ -39,3 +39,8 @@ export const postRecommendations = (data) =>
     method: 'POST',
     body: JSON.stringify(data),
   });
+export const deleteRecommendations = (id) =>
+  fetchWithAuth(`/freak/${id}`, {
+    method: 'DELETE',
+  });
+export const getFreak = (id) => fetchWithAuth(`/freak/${id}`);
