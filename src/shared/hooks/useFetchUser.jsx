@@ -1,27 +1,32 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import useGlobalReducer from '../../hooks/useGlobalReducer';
-import { getUser } from '../../services/apiBackend';
+import { getRecommendations, getUser } from '../../services/apiBackend';
 
 export const useFetchUser = () => {
   const navigate = useNavigate();
 
   const { dispatch } = useGlobalReducer();
   useEffect(() => {
-    console.log('useFetchUser - token:', localStorage.getItem('token'));
     if (!localStorage.getItem('token')) {
       navigate('/');
       return;
     }
     const fetchUser = async () => {
       try {
-        const data = await getUser();
-        if (!data || data.error) {
+        const [userData, recommendations] = await Promise.all([
+          getUser(),
+          getRecommendations(),
+        ]);
+        console.log('userData:', userData);
+        console.log('recommendations:', recommendations);
+        if (!userData || userData.error) {
           dispatch({ type: 'logout' });
           navigate('/');
           return;
         }
-        dispatch({ type: 'set_user', payload: data });
+        dispatch({ type: 'set_user', payload: userData });
+        dispatch({ type: 'set_recommendations', payload: recommendations });
       } catch {
         dispatch({ type: 'logout' });
         navigate('/');

@@ -22,7 +22,7 @@ export const Layout = () => {
         <div className=" overflow-hidden w-72">
           <Sidebar />
         </div>
-        <div className="overflow-y-auto w-full">
+        <div className="overflow-y-auto w-[calc(100%-288px)]">
           <Outlet />
         </div>
       </div>

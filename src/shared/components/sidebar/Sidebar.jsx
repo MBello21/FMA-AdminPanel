@@ -32,7 +32,7 @@ export const Sidebar = () => {
             <Link
               key={item.path}
               to={item.path}
-              className={`flex items-center gap-2 px-3 py-2 mt-3 rounded-md text-sm ${pathname === item.path ? 'bg-neutral-700 text-white border border-neutral-500 ' : 'text-gray-300 hover:bg-neutral-600'}`}
+              className={`flex items-center gap-2 px-3 py-2 mt-3 rounded-md text-sm ${pathname.includes(item.path) ? 'bg-neutral-700 text-white border border-neutral-500 ' : 'text-gray-300 hover:bg-neutral-600'}`}
             >
               <i className={`fa-solid ${item.icon}`}></i>
               {item.label}
