@@ -10,8 +10,6 @@ import { useFetchUser } from '../shared/hooks/useFetchUser.jsx';
 export const Layout = () => {
   const location = useLocation();
 
-  // const [error, setError] = useState(null);
-
   useHealthCheck();
   useFetchUser();
 

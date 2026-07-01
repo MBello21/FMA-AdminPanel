@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { postRecommendations } from '../../../../services/apiBackend';
-import useGlobalReducer from '../../../../hooks/useGlobalReducer';
+import { postRecommendations } from '../../../../../services/apiBackend';
+import useGlobalReducer from '../../../../../hooks/useGlobalReducer';
 
 const errorBackend = {
   'All fields are required': 'Todos los campos son requeridos',
@@ -68,7 +68,6 @@ export const useForm = (onClose, freak, id) => {
   const addRec = (field, input, setInput, editIdx, setEditIdx) => {
     if (!input.trim()) return;
     if (editIdx !== null) {
-      // sustituye en la posición original
       const newList = [...form[field]];
       newList[editIdx] = input.trim();
       setForm({ ...form, [field]: newList });

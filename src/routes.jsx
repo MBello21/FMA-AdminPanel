@@ -5,7 +5,6 @@ import {
   Route,
 } from 'react-router';
 import { Layout } from './pages/Layout';
-
 import { Signin } from './pages/Signin';
 import Temperatura from './pages/Home/temperatura/Temperatura';
 import { Freak } from './pages/Home/freak/Freak';
