@@ -7,7 +7,7 @@ export const ModalRecList = ({
   setInput,
 }) => {
   return (
-    <div className="flex flex-col justify-start w-full px-3 py-1 border-b border-gray-300">
+    <div className="flex flex-col justify-start w-full px-3 py-1 border-b h-auto max-h-50 border-gray-300 overflow-y-auto">
       <ul className=" text-gray-300 text-start mb-1 ">
         {form[field].map((i, index) => (
           <li key={i} className="flex items-center justify-between">

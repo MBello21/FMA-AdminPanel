@@ -18,8 +18,6 @@ export const useFetchUser = () => {
           getUser(),
           getRecommendations(),
         ]);
-        console.log('userData:', userData);
-        console.log('recommendations:', recommendations);
         if (!userData || userData.error) {
           dispatch({ type: 'logout' });
           navigate('/');

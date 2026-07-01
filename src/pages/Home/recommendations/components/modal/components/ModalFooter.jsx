@@ -1,7 +1,8 @@
 import { useFormContext } from '../../../../../../hooks/useFormContext';
 
-export const ModalFooter = ({ onClose, confirmLabel }) => {
-  const { handleSubmit } = useFormContext();
+export const ModalFooter = ({ onClose, confirmLabel, onConfirm, confirmLoad }) => {
+  const { loading } = useFormContext()
+
   return (
     <div className="w-full flex justify-end gap-3 mt-3">
       <button
@@ -12,10 +13,15 @@ export const ModalFooter = ({ onClose, confirmLabel }) => {
       </button>
       <button
         type="button"
-        onClick={handleSubmit}
+        onClick={onConfirm}
         className="px-2 py-1 border border-gray-500 text-gray-300 rounded-md hover:bg-neutral-900"
       >
-        {confirmLabel}
+
+        {loading &&
+          <i
+            className='fa-solid fa-spinner fa-spin mx-2'
+          ></i>}
+        {loading ? confirmLoad : confirmLabel}
       </button>
     </div>
   );

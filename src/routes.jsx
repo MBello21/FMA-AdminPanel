@@ -17,8 +17,7 @@ export const router = createBrowserRouter(
       <Route path="/home" element={<Layout />}>
         <Route index element={<Navigate to="temperatura" />} />
         <Route path="temperatura" element={<Temperatura />} />
-        <Route path="temperatura/:cat" element={<Temperatura />} />
-        <Route path="temperatura/edit/:id" element={<Freak />} />
+        <Route path="temperatura/:cat" element={<Freak />} />
       </Route>
     </>
   )
