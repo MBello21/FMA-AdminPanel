@@ -6,7 +6,7 @@ const Navbar = () => {
   const { store } = useGlobalReducer();
 
   return (
-    <nav className="w-full bg-neutral-600 h-12.5 border-b border-gray-400">
+    <nav className="w-full bg-neutral-800 h-12.5 border-b border-gray-400">
       <div className="flex items-center justify-between h-full">
         <div className=" flex items-center mx-4 text-blue-400">
           <div className="mx-2 bg-sky-100 rounded-lg p-1.5 flex items-center ">

@@ -5,7 +5,7 @@ import { FormProvider } from '../../../../../context/FormProvider';
 import { useFormContext } from '../../../../../hooks/useFormContext';
 
 const ModalContent = ({ onClose }) => {
-  const { ref } = useFormContext();
+  const { ref, handleSubmit } = useFormContext();
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
@@ -15,7 +15,7 @@ const ModalContent = ({ onClose }) => {
       >
         <ModalHeader onClose={onClose} title="Nueva entrada" />
         <ModalForm />
-        <ModalFooter onClose={onClose} confirmLabel="Guardar" />
+        <ModalFooter onClose={onClose} confirmLabel="Guardar" onConfirm={handleSubmit} confirmLoad='Guardando...' />
       </div>
     </div>
   );
