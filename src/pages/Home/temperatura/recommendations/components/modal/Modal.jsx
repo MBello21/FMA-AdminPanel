@@ -1,8 +1,8 @@
 import { ModalHeader } from './components/ModalHeader';
 import { ModalForm } from './components/modal-form/ModalForm';
 import { ModalFooter } from './components/ModalFooter';
-import { FormProvider } from '../../../../../context/FormProvider';
-import { useFormContext } from '../../../../../hooks/useFormContext';
+import { FormProvider } from '../../../../../../context/FormProvider';
+import { useFormContext } from '../../../../../../hooks/useFormContext';
 
 const ModalContent = ({ onClose }) => {
   const { ref, handleSubmit } = useFormContext();
@@ -15,7 +15,12 @@ const ModalContent = ({ onClose }) => {
       >
         <ModalHeader onClose={onClose} title="Nueva entrada" />
         <ModalForm />
-        <ModalFooter onClose={onClose} confirmLabel="Guardar" onConfirm={handleSubmit} confirmLoad='Guardando...' />
+        <ModalFooter
+          onClose={onClose}
+          confirmLabel="Guardar"
+          onConfirm={handleSubmit}
+          confirmLoad="Guardando..."
+        />
       </div>
     </div>
   );

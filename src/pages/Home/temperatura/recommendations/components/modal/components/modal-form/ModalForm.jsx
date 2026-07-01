@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { CATEGORIES } from '../../../../../../../constants/categories';
+import { CATEGORIES } from '../../../../../../../../constants/categories';
 
-import { useFormContext } from '../../../../../../../hooks/useFormContext';
+import { useFormContext } from '../../../../../../../../hooks/useFormContext';
 import { RecommendationBlock } from './components/RecommendationBlock';
 
 export const ModalForm = () => {
