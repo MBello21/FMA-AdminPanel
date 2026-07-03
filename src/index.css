@@ -1,5 +1,7 @@
-#root {
-  animation: fadeIn 0.2s ease-in;
+@import "tailwindcss";
+
+body {
+    font-family: "Inter", sans-serif;
 }
 
 @keyframes fadeIn {
