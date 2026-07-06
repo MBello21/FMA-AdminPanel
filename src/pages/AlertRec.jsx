@@ -13,7 +13,7 @@ const DIC_TO_CAT = {
   amarillo: 'CAT. III - Alerta amarilla',
   'precaución (riesgo muy bajo)': 'CAT I. - RIEGO MUY BAJO',
 };
-
+const aa = aa;
 export const AlertRec = () => {
   const { store, dispatch } = useGlobalReducer();
   const [searchParams] = useSearchParams();
