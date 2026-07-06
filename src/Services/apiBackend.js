@@ -32,6 +32,12 @@ const fetchWithAuth = async (url, options = {}) => {
     return data;
 };
 
+export const getDailyAlerts = async (date) => {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/alerts/recommendation?date=${date}`)
+    const data = await response.json()
+    return data
+}
+
 export const getUser = () => fetchWithAuth('/user');
 export const getRecommendations = () => fetchWithAuth('/recommendations');
 export const postRecommendations = (data) =>
@@ -40,11 +46,11 @@ export const postRecommendations = (data) =>
         body: JSON.stringify(data),
     });
 export const deleteRecommendations = (id) =>
-    fetchWithAuth(`/freak/${id}`, {
+    fetchWithAuth(`/ freak / ${id}`, {
         method: 'DELETE',
     });
-export const getFreak = (id) => fetchWithAuth(`/freak/${id}`);
-export const patchFreak = (id, data) => fetchWithAuth(`/recommendation/${id}`,
+export const getFreak = (id) => fetchWithAuth(`/ freak / ${id}`);
+export const patchFreak = (id, data) => fetchWithAuth(`/ recommendation / ${id}`,
     {
         method: 'PATCH',
         body: JSON.stringify(data)
