@@ -1,14 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { postRecommendations } from '../services/apiBackend';
 import useGlobalReducer from '../context/store-context/useGlobalReducer';
+import { useLocation } from 'react-router';
+import { CATEGORIES } from '../constants/categories';
 
 const errorBackend = {
     'All fields are required': 'Todos los campos son requeridos',
 };
 
-export const useForm = (onClose, freak, id) => {
+export const useForm = (onClose, id) => {
     const { store, dispatch } = useGlobalReducer();
     const ref = useRef();
+    const location = useLocation()
+    const freakUrl = location.pathname.split('/')[2]
     const [recInput, setRecInput] = useState('');
     const [workRecInput, setWorkRecInput] = useState('');
     const [prohRecInput, setProhRecInput] = useState('');
@@ -18,13 +22,20 @@ export const useForm = (onClose, freak, id) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [form, setForm] = useState({
-        freak: freak,
+        freak: freakUrl,
         cat: 1,
         title: '',
         recommendation_list: [],
         work_recommendation_list: [],
         prohibition_list: [],
     });
+
+    const catLabel = CATEGORIES.find(category => String(form.cat) === String(category.value))
+    const riskTitles = catLabel?.titlesByRisk?.[freakUrl]
+    const generalTitle = riskTitles?.general
+    const precaucionTitle = riskTitles?.precaucion
+    const prohibicionTitle = riskTitles?.prohibicion
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -124,6 +135,9 @@ export const useForm = (onClose, freak, id) => {
         setEditProhIndex,
         loading,
         error,
+        generalTitle,
+        precaucionTitle,
+        prohibicionTitle,
 
         ref,
         addRec,

@@ -16,9 +16,7 @@ export const ModalRecBlock = ({
         <div className="flex flex-col gap-1 ">
             <div className="w-full flex justify-between items-center">
                 <label htmlFor="recommendations" className="text-sm text-gray-300">
-                    {form.cat === 4 || form.cat === 5
-                        ? 'Recomendaciones concretas:'
-                        : title}
+                    {title}
                 </label>
                 <button type="button" onClick={() => setShow(!show)}>
                     <i

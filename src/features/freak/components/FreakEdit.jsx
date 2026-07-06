@@ -1,7 +1,7 @@
 import { EditProvider } from '../../../context/edit-context/EditProvider'
 import { useEditContext } from '../../../context/edit-context/useEditContext'
 
-export const FreakEditContent = ({ catLabel, setIsEditing }) => {
+export const FreakEditContent = ({ catLabel, setIsEditing, generalTitle, precaucionTitle, prohibicionTitle }) => {
     const field = catLabel.label;
     const {
         editForm,
@@ -43,7 +43,7 @@ export const FreakEditContent = ({ catLabel, setIsEditing }) => {
             <div className="flex flex-col bg-neutral-700 border border-neutral-600 rounded-sm px-2 py-2 mt-3">
                 <div className="w-full flex justify-between items-center">
                     <label htmlFor="recommendations" className="text-sm text-gray-300">
-                        {catLabel.generalTitle}
+                        {generalTitle}
                     </label>
                     <button type="button" onClick={() => setShow(!show)}>
                         <i
@@ -131,10 +131,10 @@ export const FreakEditContent = ({ catLabel, setIsEditing }) => {
     );
 };
 
-export const FreakEdit = ({ catLabel, initialData, navigate, setIsEditing }) => {
+export const FreakEdit = ({ catLabel, initialData, navigate, setIsEditing, generalTitle, precaucionTitle, prohibicionTitle }) => {
     return (
         <EditProvider initialData={initialData}>
-            <FreakEditContent catLabel={catLabel} setIsEditing={setIsEditing} />
+            <FreakEditContent catLabel={catLabel} setIsEditing={setIsEditing} generalTitle={generalTitle} precaucionTitle={precaucionTitle} prohibicionTitle={prohibicionTitle} />
         </EditProvider>
     );
 };

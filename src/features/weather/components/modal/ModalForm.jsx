@@ -18,7 +18,9 @@ export const ModalForm = () => {
         setEditWorkIndex,
         editProhIndex,
         setEditProhIndex,
-
+        generalTitle,
+        precaucionTitle,
+        prohibicionTitle,
         handleChange,
     } = useFormContext();
     const [showGeneral, setShowGeneral] = useState(true);
@@ -61,19 +63,22 @@ export const ModalForm = () => {
                     className="bg-neutral-900 text-gray-300 p-2 rounded-md"
                 />
             </div>
-            <ModalRecBlock
-                title="Medidas preventivas:"
-                field="recommendation_list"
-                show={showGeneral}
-                setShow={setShowGeneral}
-                input={recInput}
-                setInput={setRecInput}
-                editIdx={editIndex}
-                setEditIdx={setEditIndex}
-            />
-            {form.cat !== 4 && form.cat !== 5 && (
+            {
+                generalTitle &&
                 <ModalRecBlock
-                    title="Recomendaciones en relación a las siguientes labores:"
+                    title={generalTitle}
+                    field="recommendation_list"
+                    show={showGeneral}
+                    setShow={setShowGeneral}
+                    input={recInput}
+                    setInput={setRecInput}
+                    editIdx={editIndex}
+                    setEditIdx={setEditIndex}
+                />
+            }
+            {precaucionTitle && (
+                <ModalRecBlock
+                    title={precaucionTitle}
                     field="work_recommendation_list"
                     show={showPrecaucion}
                     setShow={setShowPrecaucion}
@@ -83,9 +88,9 @@ export const ModalForm = () => {
                     setEditIdx={setEditWorkIndex}
                 />
             )}
-            {form.cat !== 4 && form.cat !== 5 && (
+            {prohibicionTitle && (
                 <ModalRecBlock
-                    title="Prohibición en relacion a las siguientes labores:"
+                    title={prohibicionTitle}
                     field="prohibition_list"
                     show={showProhibicion}
                     setShow={setShowProhibicion}

@@ -26,9 +26,9 @@ const ModalContent = ({ onClose }) => {
     );
 };
 
-export const Modal = ({ onClose, freak }) => {
+export const Modal = ({ onClose }) => {
     return (
-        <FormProvider onClose={onClose} freak={freak}>
+        <FormProvider onClose={onClose}>
             <ModalContent onClose={onClose} />
         </FormProvider>
     );

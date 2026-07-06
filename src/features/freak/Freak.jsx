@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { generatePath, useNavigate } from 'react-router';
 import useGlobalReducer from '../../context/store-context/useGlobalReducer';
 import { useFreak } from '../../hooks/useFreak';
 import { FreakBody } from './components/FreakBody';
@@ -7,7 +7,7 @@ import { FreakHeader } from './components/FreakHeader';
 import { FreakEdit } from './components/FreakEdit';
 
 export const Freak = () => {
-    const { cat, basePath, catLabel, freak, handleBack, handlePost } = useFreak();
+    const { cat, basePath, catLabel, freak, handleBack, handlePost, generalTitle, precaucionTitle, prohibicionTitle } = useFreak();
     const [isEditing, setIsEditing] = useState(false);
     const { store } = useGlobalReducer();
     const navigate = useNavigate()
@@ -26,9 +26,20 @@ export const Freak = () => {
                 onClick={() => setIsEditing(true)}
             />
             {isEditing ? (
-                <FreakEdit key={cat} initialData={initialData} catLabel={catLabel} setIsEditing={setIsEditing} />
+                <FreakEdit key={cat}
+                    initialData={initialData}
+                    catLabel={catLabel}
+                    setIsEditing={setIsEditing}
+                    generalTitle={generalTitle}
+                    precaucionTitle={precaucionTitle}
+                    prohibicionTitle={prohibicionTitle} />
             ) : (
-                <FreakBody key={cat} recommendation={initialData} catLabel={catLabel} />
+                <FreakBody key={cat}
+                    recommendation={initialData}
+                    catLabel={catLabel}
+                    generalTitle={generalTitle}
+                    precaucionTitle={precaucionTitle}
+                    prohibicionTitle={prohibicionTitle} />
             )}
         </div>
     );

@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import useGlobalReducer from '../../../context/store-context/useGlobalReducer'
 import { DeleteModal } from './delete-modal/DeleteModal';
 import { deleteRecommendations } from '../../../services/apiBackend';
 
 export const Card = ({ categories, freak }) => {
+
+
     const { store, dispatch } = useGlobalReducer();
     const [deleteId, setDeleteId] = useState(null);
 
@@ -33,6 +35,10 @@ export const Card = ({ categories, freak }) => {
             {store.recommendations?.filter(item => item.freak === freak)
                 .map((item) => {
                     const catInfo = categories.find((i) => String(i.value) === item.cat);
+                    const riskTitles = catInfo?.titlesByRisk?.[freak];
+                    const generalTitle = riskTitles?.general
+                    const precaucionTitle = riskTitles?.precaucion
+                    const prohibicionTitle = riskTitles?.prohibicion
                     return (
                         <div
                             key={item.id}
@@ -45,7 +51,7 @@ export const Card = ({ categories, freak }) => {
                                     {catInfo?.label}
                                 </h3>
                                 <div className="flex gap-2">
-                                    <Link to={`/home/temperatura/${item.cat}`}>
+                                    <Link to={`/home/${freak}/${item.cat}`}>
                                         <button className="px-2 py-1 border border-gray-500 text-gray-300 rounded-md">
                                             <i className="fa-solid fa-pen-to-square"></i>
                                         </button>
@@ -64,9 +70,7 @@ export const Card = ({ categories, freak }) => {
                             <div className="px-2 py-4">
                                 <div>
                                     <h2 className="text-gray-300 mb-1">
-                                        {Number(item.cat) === 4 || Number(item.cat) === 5
-                                            ? 'Recomendaciones concretas:'
-                                            : 'Medidas Preventivas'}
+                                        {generalTitle}
                                     </h2>
                                     <ul className="list-disc list-inside text-gray-300">
                                         {item.recommendation.map((i) => (
@@ -79,7 +83,7 @@ export const Card = ({ categories, freak }) => {
                                 .length > 0 && (
                                     <div className="px-2 py-4">
                                         <div>
-                                            <h2 className="text-gray-300">Precaución con:</h2>
+                                            <h2 className="text-gray-300">{precaucionTitle}</h2>
                                             <ul className="list-disc list-inside text-gray-300">
                                                 {item.work_recommendation
                                                     .filter((w) => w.type === 'precaucion')
@@ -95,7 +99,7 @@ export const Card = ({ categories, freak }) => {
                                     <div className="px-2 py-4">
                                         <div>
                                             <h2 className="text-gray-300">
-                                                Prohibición de las siguientes labores:
+                                                {prohibicionTitle}
                                             </h2>
                                             <ul className="list-disc list-inside text-gray-300">
                                                 {item.work_recommendation
