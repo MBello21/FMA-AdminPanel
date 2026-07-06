@@ -5,6 +5,7 @@ export const initialStore = () => {
         token: null,
         recommendations: [],
         freak: null,
+        alerts: []
     };
 };
 
@@ -42,6 +43,11 @@ export const storeReducer = (store, action = {}) => {
             return {
                 ...store,
                 freak: action.payload,
+            };
+        case 'set_alerts':
+            return {
+                ...store,
+                alerts: action.payload,
             };
         default:
             throw Error('Unknow action.');
