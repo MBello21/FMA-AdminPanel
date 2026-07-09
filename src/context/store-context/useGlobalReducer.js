@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { StoreContext } from "../context/StoreContext";
+import { StoreContext } from "./StoreContext";
 
 export default function useGlobalReducer() {
     const { dispatch, store } = useContext(StoreContext)
