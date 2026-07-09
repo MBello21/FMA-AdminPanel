@@ -4,13 +4,13 @@ import { AlertHeader } from './components/AlertHeader';
 import { AlertBody } from './components/alert-body/AlertBody';
 
 const AlertRecContent = () => {
-  const { filtered } = useAlertContext();
+  const { filtered, isLoading } = useAlertContext();
   return (
     <>
       {filtered.length > 0 ? (
         filtered.map((alert) => (
           <div
-            className="flex flex-col items-center justify-center bg-neutral-100 min-h-screen overflow-y-auto p-3"
+            className="flex flex-col items-center justify-center bg-neutral-100 min-h-screen overflow-y-auto p-3 "
             key={alert.id}
           >
             <AlertHeader alert={alert} />
@@ -18,7 +18,9 @@ const AlertRecContent = () => {
           </div>
         ))
       ) : (
-        <div className="flex flex-col items-center justify-center bg-neutral-100 min-h-screen p-3">
+        <div
+          className={`flex flex-col items-center justify-center bg-neutral-100 min-h-screen overflow-y-auto p-3 transition-opacity duration-700 ${isLoading ? 'opacity-0' : 'opacity-100'} `}
+        >
           <AlertHeader alert={null} />
           <AlertBody alert={null} />
         </div>
