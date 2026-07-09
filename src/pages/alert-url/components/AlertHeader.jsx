@@ -11,7 +11,9 @@ export const AlertHeader = ({ alert }) => {
         Coex CA03 <span> · </span> Puentes de Cádiz
       </h3>
       <div>
-        <i className="fa-solid fa-circle-exclamation text-5xl md:text-6xl animate-pulse m-2"></i>
+        <i
+          className={`fa-solid ${catInfo?.icon || 'fa-circle-check'} text-5xl md:text-6xl ${alert ? 'animate-pulse' : 'animate-none'} m-2`}
+        ></i>
       </div>
       <div className="m-2">
         <h1>{catInfo?.title || 'No hay alertas activas'}</h1>
