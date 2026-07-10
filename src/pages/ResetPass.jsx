@@ -1,5 +1,13 @@
 import { useResetPass } from '../hooks/useResetPass';
 
+function getStrength(passed) {
+  if (passed <= 1) return { label: 'Débil', color: '#ef4444', width: '20%' };
+  if (passed <= 2) return { label: 'Débil', color: '#f97316', width: '40%' };
+  if (passed <= 3) return { label: 'Media', color: '#eab308', width: '60%' };
+  if (passed <= 4) return { label: 'Buena', color: '#22d3ee', width: '80%' };
+  return { label: 'Fuerte', color: '#22c55e', width: '100%' };
+}
+
 export const ResetPass = () => {
   const {
     loading,
@@ -8,10 +16,14 @@ export const ResetPass = () => {
     showConfirmPass,
     setShowConfirmPass,
     pass,
+    touched,
+    error,
+    passedCount,
+    validation,
     handleSubmit,
     handleChange,
   } = useResetPass();
-
+  const strength = getStrength(pass.password ? passedCount : 0);
   return (
     <div className="flex flex-col justify-center items-center   min-h-screen bg-neutral-900">
       <div className="flex flex-col justify-center  bg-neutral-500  p-6 rounded-md border border-neutral-300 gap-3 w-full max-w-lg">
@@ -62,6 +74,49 @@ export const ResetPass = () => {
               ></i>
             </div>
           </div>
+          {touched.password && pass.password && (
+            <div style={{ marginBottom: 16 }}>
+              <div
+                style={{
+                  height: 4,
+                  borderRadius: 2,
+                  background: 'var(--border, #252525)',
+                  overflow: 'hidden',
+                  marginBottom: 6,
+                }}
+              >
+                <div
+                  style={{
+                    height: '100%',
+                    width: strength.width,
+                    background: strength.color,
+                    borderRadius: 2,
+                    transition: 'all 0.3s ease',
+                  }}
+                />
+              </div>
+              <span
+                style={{ fontSize: 12, color: strength.color, fontWeight: 500 }}
+              >
+                {strength.label}
+              </span>
+            </div>
+          )}
+          {touched.password && (
+            <ul className="list-none p-0 m-0 mb-4 flex flex-col gap-1 w-[85%] px-7">
+              {validation.map((rule) => (
+                <li
+                  key={rule.id}
+                  className={`text-xs flex items-center gap-2 ${
+                    rule.passed ? 'text-green-400' : 'text-neutral-300'
+                  }`}
+                >
+                  <span>{rule.passed ? '✓' : '·'}</span>
+                  {rule.label}
+                </li>
+              ))}
+            </ul>
+          )}
           <div className="flex flex-col px-7 gap-1 mb-4 w-[85%]">
             <label
               htmlFor="confirmPass"
@@ -84,6 +139,12 @@ export const ResetPass = () => {
               ></i>
             </div>
           </div>
+
+          {error && (
+            <span className="text-red-900 bg-red-300 px-2 py-1 rounded-md text-md">
+              {error}
+            </span>
+          )}
           <div className="flex justify-center items-center">
             <button
               type="submit"
