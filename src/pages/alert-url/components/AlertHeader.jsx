@@ -1,7 +1,7 @@
 import { DIC_TO_CAT } from '../../../constants/dic-to-cat';
 
 export const AlertHeader = ({ alert }) => {
-  const catInfo = alert ? DIC_TO_CAT[alert.level] : null;
+  const catInfo = alert ? DIC_TO_CAT[alert.level.toLowerCase()] : null;
 
   return (
     <div
