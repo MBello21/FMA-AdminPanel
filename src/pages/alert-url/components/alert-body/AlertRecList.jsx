@@ -5,7 +5,7 @@ import { RecommendationSection } from './RecommendationSection';
 
 export const AlertRecList = ({ alert }) => {
   const { isActive } = useAlertContext();
-  const catValue = DIC_TO_CAT[alert?.level]?.cat;
+  const catValue = DIC_TO_CAT[alert?.level.toLowerCase()]?.cat;
   const category = CATEGORIES.find((c) => c.value === catValue);
   const titles = category?.titlesByRisk?.[isActive];
   return (
