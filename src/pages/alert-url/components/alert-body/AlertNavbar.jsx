@@ -8,6 +8,7 @@ export const AlertNavbar = () => {
         field="Temperatura"
         freak="temperatura"
         freakAlert={tempAlert}
+        handleTab={handleTab}
       />
       <AlertButton
         field="Viento"
