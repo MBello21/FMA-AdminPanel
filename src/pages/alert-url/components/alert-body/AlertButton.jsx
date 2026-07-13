@@ -10,7 +10,7 @@ export const AlertButton = ({ field, freak, freakAlert }) => {
     >
       {hasAlert(freak).length > 0 && (
         <div
-          className={`absolute top-0 md:top-0.5 right-0 md:right-3 ${!visited.has(freak) ? 'animate-pulse' : ''} ${DIC_TO_CAT[freakAlert?.level]?.color} mt-1 p-2 md:p-3 w-2 h-2 md:w-5 md:h-5 rounded-full flex items-center justify-center`}
+          className={`absolute top-0 md:top-0.5 right-0 md:right-3 ${!visited.has(freak) ? 'animate-pulse' : ''} ${DIC_TO_CAT[freakAlert?.level.toLowerCase()]?.color} mt-1 p-2 md:p-3 w-2 h-2 md:w-5 md:h-5 rounded-full flex items-center justify-center`}
         ></div>
       )}
       {field}
