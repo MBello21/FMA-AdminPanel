@@ -36,13 +36,13 @@ export const useAlertUrl = () => {
     )
   );
   const hasAlert = (freak) =>
-    store.alerts.filter((i) =>
+    store.alerts?.filter((i) =>
       PARAM_FILTER[freak].some((key) =>
         i.description.toLowerCase().includes(key)
       )
     );
   const getAlertByType = (type) => {
-    return store.alerts.find((a) => a.parameter.toLowerCase().includes(type));
+    return store.alerts?.find((a) => a.parameter.toLowerCase().includes(type));
   };
 
   const [visited, setVisited] = useState(new Set(['temperatura']));
