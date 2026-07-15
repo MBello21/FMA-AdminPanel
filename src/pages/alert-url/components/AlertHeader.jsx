@@ -8,7 +8,7 @@ export const AlertHeader = ({ alert }) => {
       className={`flex flex-col justify-center w-full max-w-md md:max-w-2xl items-center ${catInfo?.color || 'bg-sky-200'} ${catInfo?.textColor || 'text-sky-900'} h-[40%] rounded-t-md`}
     >
       <h3 className="text-md md:text-2xl m-2">
-        Coex CA03 <span> · </span> Puentes de Cádiz
+        COEX CA-03 <span> · </span> CA-35 y CA-36
       </h3>
       <div>
         <i
