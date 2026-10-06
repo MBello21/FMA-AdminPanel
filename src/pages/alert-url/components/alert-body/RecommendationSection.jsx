@@ -5,6 +5,8 @@ export const RecommendationSection = ({
   field,
   icon,
 }) => {
+
+  console.log(title)
   return (
     <div className="text-neutral-900 mb-2">
       <h3 className="px-3 py-2 font-bold">

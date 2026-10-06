@@ -8,7 +8,9 @@ export const AlertRecList = ({ alert }) => {
   const catValue = DIC_TO_CAT[alert?.level.toLowerCase()]?.cat;
   const category = CATEGORIES.find((c) => c.value === catValue);
   const titles = category?.titlesByRisk?.[isActive];
+  console.log('DEBUG', { alert, isActive, catValue, recs: alert?.recommendations });
   return (
+    
     <>
       <h2 className=" p-2 text-base font-bold text-slate-800 pb-3 border-b border-slate-200">
         {alert.recommendations.title}
